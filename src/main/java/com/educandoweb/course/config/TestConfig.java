@@ -14,8 +14,12 @@ import com.educandoweb.course.repositories.UserRepository;
 @Profile("test")
 public class TestConfig implements CommandLineRunner {
 
-	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	public TestConfig(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 
 	@Override
 	public void run(String... args) throws Exception {
