@@ -49,14 +49,26 @@ public class TestConfig implements CommandLineRunner {
 		Category cat2 = new Category(null, "Books");
 		Category cat3 = new Category(null, "Computers");
 
-		Product p1 = new Product(null, "KeyBoard", "RGB Mechanical Keyboard", 450.0, "http://img.com/1");
-		Product p2 = new Product(null, "Head First Java", "Java book for dummies", 130.0, "http://img.com/2");
-		Product p3 = new Product(null, "PC Pro", "Intel Core i9, 32 Gb, SSD 1TB", 5450.0, "http://img.com/3");
+		Product p1 = new Product(null, "Head First Java", "Java book for dummies", 130.0, "");
+		Product p2 = new Product(null, "Smart TV", "Samsung 52'", 2600.0, "");
+		Product p3 = new Product(null, "Macbook Pro", "Intel Core i9, 64 Gb, SSD 2TB", 15450.0, "");
+		Product p4 = new Product(null, "KeyBoard", "RGB Mechanical Keyboard", 450.0, "");
+		Product p5 = new Product(null, "Dart and Flutter", "Development for every platform", 89.0, "");
 
 		userRepository.saveAll(Arrays.asList(u1, u2));
 		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
-		productRepository.saveAll(Arrays.asList(p1, p2, p3));
+		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+
+		p1.getCategories().add(cat2);
+		p2.getCategories().add(cat1);
+		p3.getCategories().add(cat1);
+		p3.getCategories().add(cat3);
+		p4.getCategories().add(cat1);
+		p4.getCategories().add(cat3);
+		p5.getCategories().add(cat2);
+
+		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 	}
 
 }
