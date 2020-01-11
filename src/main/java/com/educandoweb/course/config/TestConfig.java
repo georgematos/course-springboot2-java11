@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.educandoweb.course.entities.Category;
 import com.educandoweb.course.entities.Order;
+import com.educandoweb.course.entities.Product;
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.entities.enums.OrderStatus;
 import com.educandoweb.course.repositories.CategoryRepository;
 import com.educandoweb.course.repositories.OrderRepository;
+import com.educandoweb.course.repositories.ProductRepository;
 import com.educandoweb.course.repositories.UserRepository;
 
 @Configuration
@@ -23,13 +25,15 @@ public class TestConfig implements CommandLineRunner {
 	private UserRepository userRepository;
 	private OrderRepository orderRepository;
 	private CategoryRepository categoryRepository;
+	private ProductRepository productRepository;
 
 	@Autowired
 	public TestConfig(UserRepository userRepository, OrderRepository orderRepository,
-			CategoryRepository categoryRepository) {
+			CategoryRepository categoryRepository, ProductRepository productRepository) {
 		this.userRepository = userRepository;
 		this.orderRepository = orderRepository;
 		this.categoryRepository = categoryRepository;
+		this.productRepository = productRepository;
 	}
 
 	@Override
@@ -45,9 +49,14 @@ public class TestConfig implements CommandLineRunner {
 		Category cat2 = new Category(null, "Books");
 		Category cat3 = new Category(null, "Computers");
 
+		Product p1 = new Product(null, "KeyBoard", "RGB Mechanical Keyboard", 450.0, "http://img.com/1");
+		Product p2 = new Product(null, "Head First Java", "Java book for dummies", 130.0, "http://img.com/2");
+		Product p3 = new Product(null, "PC Pro", "Intel Core i9, 32 Gb, SSD 1TB", 5450.0, "http://img.com/3");
+
 		userRepository.saveAll(Arrays.asList(u1, u2));
 		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+		productRepository.saveAll(Arrays.asList(p1, p2, p3));
 	}
 
 }
