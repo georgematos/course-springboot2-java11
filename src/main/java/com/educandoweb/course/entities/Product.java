@@ -29,10 +29,8 @@ public class Product implements Serializable {
 
     @ManyToMany
     @JoinTable(name = "tb_product_category", // table name that will join the others two tables
-            joinColumns = @JoinColumn(name = "product_id"), // column name in the other table that will contain the
-                                                            // foreign key for that
-            inverseJoinColumns = @JoinColumn(name = "category_id")) // column name of this table that will contain the
-                                                                    // foreign key to another table
+            joinColumns = @JoinColumn(name = "product_id"), // column at intermediate table with product id
+            inverseJoinColumns = @JoinColumn(name = "category_id")) // column in intermediate talbe with category id
     Set<Category> categories = new HashSet<>();
 
     public Product() {
