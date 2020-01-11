@@ -7,15 +7,22 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.educandoweb.course.entities.pk.OrderItemPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * This class is a exemple of a join table with your own fields, it joins Order
+ * and Product in a many to many relationship through OrderItemPK class
+ */
 @Entity
 @Table(name = "tb_order_item")
 public class OrderItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    // Aways we have a composed Id we must instantiate the object
     @EmbeddedId
-    private OrderItemPK id;
+    private OrderItemPK id = new OrderItemPK();
+
     private Integer quantity;
     private Double price;
 
@@ -30,10 +37,10 @@ public class OrderItem implements Serializable {
     }
 
     public Double subTotal() {
-        // get all products associated to order and return the sum of his prices
-        return null;
+        return quantity * price;
     }
 
+    @JsonIgnore
     public Order getOrder() {
         return id.getOrder();
     }

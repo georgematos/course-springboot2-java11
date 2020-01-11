@@ -10,8 +10,10 @@ import com.educandoweb.course.entities.Order;
 import com.educandoweb.course.entities.Product;
 
 /**
- * PK classes don't have constructors implemented
+ * 1. This class is the join table of Order and Product and it is whitin
+ * OrderItem class.
  * 
+ * 2. PK classes don't have constructors implemented.
  */
 
 @Embeddable
@@ -22,7 +24,7 @@ public class OrderItemPK implements Serializable {
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
-    
+
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
