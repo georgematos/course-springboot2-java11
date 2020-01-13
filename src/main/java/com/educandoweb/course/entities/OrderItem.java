@@ -21,7 +21,7 @@ public class OrderItem implements Serializable {
 
     // Aways we have a composed Id we must instantiate the object
     @EmbeddedId
-    private OrderItemPK id = new OrderItemPK();
+    private OrderItemPK id = new OrderItemPK(); // will recieve in constructor the classes that will to relate
 
     private Integer quantity;
     private Double price;

@@ -3,6 +3,7 @@ package com.educandoweb.course.entities;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_product")
@@ -26,6 +30,9 @@ public class Product implements Serializable {
     private String description;
     private Double price;
     private String imgUrl;
+
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> items = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "tb_product_category", // table name that will join the others two tables
@@ -50,6 +57,12 @@ public class Product implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @JsonIgnore
+    public Set<Order> getOrders() {
+        Set<Order> orders = items.stream().map(OrderItem::getOrder).collect(Collectors.toSet());
+        return orders;
     }
 
     public String getName() {
