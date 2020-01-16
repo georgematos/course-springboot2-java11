@@ -26,4 +26,14 @@ public class UserService {
 		return repository.findById(id).get();
 	}
 
+	public User save(User entity) {
+		User persistedEntity = new User();
+		try {
+			return repository.save(entity);
+		} catch (IllegalArgumentException e) {
+			System.out.println("Entity is null");
+		}
+		return persistedEntity;
+	}
+
 }

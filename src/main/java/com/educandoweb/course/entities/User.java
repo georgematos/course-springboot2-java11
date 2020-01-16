@@ -26,7 +26,7 @@ public class User implements Serializable {
 	private String password;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "client")
+	@OneToMany(mappedBy = "client") // mappedBy: The Order field that owns the relationship. Required unless the relationship is unidirectional. Default: ""
 	private List<Order> orders = new ArrayList<>(); // implements only get for collections
 
 	public User() {
