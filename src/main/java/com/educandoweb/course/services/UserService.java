@@ -2,11 +2,14 @@ package com.educandoweb.course.services;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import javax.validation.ConstraintViolationException;
 
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.repositories.UserRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
@@ -34,6 +37,16 @@ public class UserService {
 			System.out.println("Entity is null");
 		}
 		return persistedEntity;
+	}
+
+	public void delete(Long id) {
+		try {
+			repository.deleteById(id);
+		} catch (IllegalArgumentException e) {
+			System.out.println("Id is null");
+		} catch (DataIntegrityViolationException e) {
+			System.out.println("The entity owns other entity associated.");	
+		}
 	}
 
 }
