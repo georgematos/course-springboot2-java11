@@ -2,8 +2,6 @@ package com.educandoweb.course.services;
 
 import java.util.List;
 
-import javax.validation.ConstraintViolationException;
-
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.repositories.UserRepository;
 
@@ -45,8 +43,20 @@ public class UserService {
 		} catch (IllegalArgumentException e) {
 			System.out.println("Id is null");
 		} catch (DataIntegrityViolationException e) {
-			System.out.println("The entity owns other entity associated.");	
+			System.out.println("The entity owns other entity associated.");
 		}
+	}
+
+	public User update(Long id, User entity) {
+		User originalUser = repository.getOne(id);
+		updateData(originalUser, entity);
+		return repository.save(originalUser);
+	}
+
+	private void updateData(User originalUser, User entity) {
+		originalUser.setName(entity.getName());
+		originalUser.setEmail(entity.getEmail());
+		originalUser.setPhone(entity.getPhone());
 	}
 
 }
