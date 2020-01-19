@@ -2,7 +2,6 @@ package com.educandoweb.course.services;
 
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.persistence.EntityNotFoundException;
 
 import com.educandoweb.course.entities.User;
